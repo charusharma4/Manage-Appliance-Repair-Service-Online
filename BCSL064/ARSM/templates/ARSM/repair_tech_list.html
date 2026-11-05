@@ -1,0 +1,49 @@
+<!--Technician repair lis-->
+{% extends "ARSM/base.html" %}
+{% block title %}Repairs List{% endblock %}
+
+{% block content %}
+
+<div class="appliance-container">
+
+    <h2><center>Repair List</center></h2>
+
+    <div class="top-actions">
+    </div>
+
+    <table class="appliance-table">
+        <thead>
+            <tr>
+                <th>Complaint ID</th>
+                <th>Technician ID</th>
+                <th>Work Done</th>
+                <th>Parts Used</th>
+                <th>Cost</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for rp in repairs %}
+            <tr>
+                <td>{{ rp.complaint_id }}</td>
+                <td>{{ rp.technician_id}}</td>
+                <td>{{ rp.work_done }}</td>
+                <td>{{rp.parts_used}}</td>
+                <td>{{ rp.cost }}</td>
+
+                <td>
+                    <a href="{% url 'update_repair' rp.id %}" class="edit-btn">Edit</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="no-data">No Repair Available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

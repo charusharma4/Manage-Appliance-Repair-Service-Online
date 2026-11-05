@@ -1,0 +1,23 @@
+{% extends 'ARSM/base.html' %}
+{% block title %} User Registration {% endblock %}
+<!-- For SIGNUP Page -->
+{% block content %}
+<form class="form2" method="post">
+    
+    <h1 class="form-title1">Create Account</h1>
+
+    {% csrf_token %}
+    
+    {{ user_form.as_p }}
+    {{ customer_form.as_p }}
+
+    {% if user_form.non_field_errors or customer_form.non_field_errors %}
+    <div class="form-error">
+        {{ user_form.non_field_errors }}
+        {{ customer_form.non_field_errors }}
+    </div>
+    {% endif %}
+
+    <button class="btn" type="submit">Register</button>
+</form>
+{% endblock %}

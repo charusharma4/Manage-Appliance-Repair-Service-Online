@@ -1,0 +1,53 @@
+<!-- Admin complaint list-->
+{% extends "ARSM/base.html" %}
+{% block title %}Complaint List{% endblock %}
+
+{% block content %}
+
+<div class="complaints-container">
+
+    <h2><center>Complaint List</center></h2>
+
+    <div class="top-actions">
+        <a href="{% url 'customer_dashboard' %}" class="logout-btn">Logout</a>
+        <a href="{% url 'complaint_admin_list' %}" class="add-btn">Add New Complaint</a>
+    </div>
+
+    <table class="complaints-table">
+        <thead>
+            <tr>
+                <th>Complaint Id</th>
+                <th>User ID</th>
+                <th>Appliance ID</th>
+                <th>Priority</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Service Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cp in complaint_admin %}
+            <tr>
+                <td>{{ cp.id }}</td>
+                <td>{{ cp.user_id }}</td>
+                <td>{{ cp.app_id }}</td>
+                <td>{{ cp.priority }}</td>
+                <td>{{ cp.description }}</td>
+                <td>{{ cp.status }}</td>
+                <td>{{ cp.service_address }}</td>
+                <td>
+                   <a href="{% url 'technician_assignment_view' cp.id %}" class="edit-btn">Assignment_ <br> <br>_technician</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="no-data">No Complaint Available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

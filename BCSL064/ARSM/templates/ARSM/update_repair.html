@@ -1,0 +1,19 @@
+<!--Admin Update repair-->
+{% extends "ARSM/base.html" %}
+{% block content %}
+
+<h2 class="title1">Update Repair</h2>
+
+<div class="update">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="btn-group">
+            <button type="submit" class="update-btn">Update</button>
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

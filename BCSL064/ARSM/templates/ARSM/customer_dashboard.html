@@ -1,0 +1,19 @@
+{% extends 'ARSM/base.html' %}
+
+{% block title %}customer Dashboard{% endblock %}
+{% block content %}
+<div class="Customer_db">
+
+  <h1>Welcome Customer</h1>
+  <p>You can add options used by technician who logged in</p>
+
+  <ul>
+       <li><a href="{% url 'appliances' %}"> Add Appliances </a></li>
+       <li><a href="{% url 'appliances_list' %}">Appliances List</a></li>
+       <li><a href="{% url 'complaints' %}">Add Complaints</a></li>
+       <li><a href="{% url 'complaint_list' %}">Complaints List</a></li>
+       <li><a href="{% url 'feedback' %}">Add Feedback</a></li>
+       <li><a href="{% url 'notification_list' %}">Notifications</a></li>
+  </ul>
+</div>
+{% endblock %}

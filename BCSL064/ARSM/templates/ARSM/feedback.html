@@ -1,0 +1,14 @@
+<!--Submit feedback-->
+{% extends "ARSM/base.html" %}
+{% block title %}appliances{% endblock %}
+{% block content %}
+<div class="form-container">
+    <h2 class="form-title">Add Feedback</h2>
+    <form method='POST' class="appliance-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Send Feedback</button>
+    </form>
+</div>
+
+{% endblock %}

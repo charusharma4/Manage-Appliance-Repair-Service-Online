@@ -1,0 +1,22 @@
+{% extends "ARSM/base.html" %}
+{% block title %}appliances{% endblock %}
+{% block content %}
+<div class="form-container">
+    <h2 class="form-title">Add Appliances</h2>
+    <form method='POST' class="appliance-form">
+        {% csrf_token %}
+    
+        <label>Appliance Type</label>
+        {{ form.type }}
+        
+        <label>Brand Name</label>
+        {{ form.brand_name }}
+        
+        <label>Model</label>
+        {{ form.model }}
+
+        <button type="submit">save appliances</button>
+    </form>
+</div>
+
+{% endblock %}

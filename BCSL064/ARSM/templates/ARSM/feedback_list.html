@@ -1,0 +1,41 @@
+<!--Admin feedback list-->
+{% extends "ARSM/base.html" %}
+{% block title %}Appliances List{% endblock %}
+
+{% block content %}
+
+<div class="appliance-container">
+
+    <h2><center>Feedback List</center></h2>
+
+    <table class="appliance-table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Complaint Id</th>
+                <th>Rating</th>
+                <th>Comment</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for fp in feedback %}
+            <tr>
+                <td>{{ fp.email }}</td>
+                <td>{{ fp.complaint_id }}</td>
+                <td>{{ fp.rating }}</td>
+                <td>{{ fp.comment }}</td>
+                <td><a href="{% url 'feedback_reply' fp.id %}" class="edit-btn">Feedback Reply</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="no-data">No Feedback Available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

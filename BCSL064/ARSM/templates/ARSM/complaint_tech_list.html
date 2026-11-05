@@ -1,0 +1,54 @@
+{% extends "ARSM/base.html" %}
+{% block title %}Complaints List{% endblock %}
+<!--Technician complaint list-->
+{% block content %}
+
+<div class="complaints-container">
+
+    <h2><center>Complaints List</center></h2>
+
+    <div class="top-actions">
+
+    </div>
+
+    <table class="complaints-table">
+        <thead>
+            <tr>
+                <th> ID</th>
+                <th>User ID</th>
+                <th>Appliance ID</th>
+                <th>Priority</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Service Address</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for cp in complaints %}
+            <tr>
+                <td>{{ cp.id }}</td>
+                <td>{{ cp.user_id }}</td>
+                <td>{{ cp.app_id }}</td>
+                <td>{{ cp.priority }}</td>
+                <td>{{ cp.description }}</td>
+                <td>{{ cp.status }}</td>
+                <td>{{ cp.service_address }}</td>
+                <td>
+                
+                    <a href="{% url 'repair_view' cp.id %}" class="edit-btn">Repair</a>
+                
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="no-data">No Complaints Available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

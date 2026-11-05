@@ -1,0 +1,14 @@
+{% extends 'ARSM/base.html' %}
+
+{% block title %}Register_Technician{% endblock %}
+{% block content %}
+<div class="db">   
+    <h1>Register Technician</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ technician_form.as_p }}
+        <button type="submit">Register Technician</button>
+</div>
+{% endblock %}

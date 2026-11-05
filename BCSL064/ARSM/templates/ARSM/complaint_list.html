@@ -1,0 +1,65 @@
+<!--Customer complaint list-->
+{% extends "ARSM/base.html" %}
+{% block title %}Complaint List{% endblock %}
+
+{% block content %}
+<div class="complaints-container">
+    <h2><center>Complaint List</center></h2>
+
+    <div class="top-actions">
+        </div>
+
+    <table class="complaints-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>USer Id</th>
+                <th>Appliance</th>
+                <th>Priority</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Address</th>
+                <th>Actions</th>
+                <th>Invoce</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cp in complaint %}
+            <tr>
+                <td> {{ cp.id }}</td>
+                <td>{{ cp.user_id }}</td>
+                <td>{{ cp.app_id }}</td> <!-- Uses the __str__ we fixed earlier -->
+                <td>{{ cp.priority }}</td>
+                <td>{{ cp.description }}</td>
+                <td>
+                    <span class="status-{{ cp.status|lower }}">{{ cp.status }}</span>
+                </td>
+                <td>{{ cp.service_address }}</td>
+                <td>
+                    {% if cp.status != 'cancelled' and cp.status != 'completed' %}
+                        <a href="{% url 'cancel_complaint' cp.id %}" 
+                           class="delete-btn" 
+                           style="background-color: #ff4d4d;"
+                           onclick="return confirm('Are you sure you want to cancel this complaint?')">
+                           Cancel
+                        </a>
+                    {% else %}
+                        <span class="text-muted">No actions</span>
+                    {% endif %}
+                </td>
+                <td>
+            
+   <a href="{% url 'repair_invoice' cp.id %}">View Invoice</a>
+     
+
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="no-data">No Complaint Available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

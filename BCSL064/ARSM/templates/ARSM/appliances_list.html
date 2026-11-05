@@ -1,0 +1,48 @@
+{% extends "ARSM/base.html" %}
+{% block title %}Appliances List{% endblock %}
+
+{% block content %}
+
+<div class="appliance-container">
+
+    <h2><center>Appliances List</center></h2>
+
+    <div class="top-actions">
+        <a href="{% url 'appliances' %}" class="add-btn">+ Add New Appliance</a>
+    </div>
+
+    <table class="appliance-table">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Type</th>
+                <th>Brand Name</th>
+                <th>Model</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for ap in appliances %}
+            <tr>
+                <td>{{ ap.user_id }}</td>
+                <td>{{ ap.type }}</td>
+                <td>{{ ap.brand_name }}</td>
+                <td>{{ ap.model }}</td>
+
+                <td>
+                    <a href="{% url 'update_appliances' ap.id %}" class="edit-btn">Edit</a>
+                    <a href="{% url 'delete_appliances' ap.id %}" class="delete-btn">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="no-data">No Appliances Available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

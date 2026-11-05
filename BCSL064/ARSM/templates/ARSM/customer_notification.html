@@ -1,0 +1,17 @@
+<!---->
+{% extends 'ARSM/base.html'%}
+{% block title %} send notification {% endblock %}
+
+{% block content %}
+<div class="msg">
+    <h3 class="msg-title">Reply</h3>
+
+    <form method="POST" class="msg-form">
+        {% csrf_token %}
+
+      {{ notification.}}
+
+        <button type="submit" class="msg-button">Send Notification</button>
+    </form>
+</div>
+{% endblock %}

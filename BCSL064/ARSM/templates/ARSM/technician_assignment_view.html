@@ -1,0 +1,23 @@
+<!-- Assign technician-->
+{% extends "ARSM/base.html" %}
+{% block title %} Technician Assignment{% endblock %}
+    <p>May Help You</p>
+    {% block content %}
+    <form method='POST' class=" Technician_assignment">
+        <h2><center>Technician Assignment</center></h2>
+        <br>
+        {% csrf_token %}
+
+        <label>Technician Id</label>
+        {{ form.technician_id }}
+
+        <label>status</label>
+        {{ form.status }}
+        
+        <label>remark</label>
+        {{ form.remark }}
+        
+        <button type="submit"> Technician Assignment</button>
+    </form>
+</div>
+{% endblock %} 

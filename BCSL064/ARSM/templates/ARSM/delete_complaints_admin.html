@@ -1,0 +1,34 @@
+<!---->
+{% extends "ARSM/base.html" %}
+
+{% block title %}Delete Complaint{% endblock %}
+
+{% block content %}
+<div class="delete-container">
+
+    <h2 class="title">Delete Complaint</h2>
+
+    <p class="warning-text">
+        Are you sure you want to delete this complaint?
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-data">
+            {{ complaint_admin.as_p }}
+        </div>
+
+        <div class="actions">
+            <button type="submit" class="btn-delete">
+                Yes, Delete
+            </button>
+
+            <a href="{% url 'complaint_admin_list' %}" class="btn-cancel">
+                Cancel
+            </a>
+        </div>
+    </form>
+
+</div>
+{% endblock %}

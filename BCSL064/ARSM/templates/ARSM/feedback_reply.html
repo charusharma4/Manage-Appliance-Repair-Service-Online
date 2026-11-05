@@ -1,0 +1,22 @@
+<!--Reply to feedback-->
+{% extends 'ARSM/base.html'%}
+{% block title %} Reply Message {% endblock %}
+
+{% block content %}
+
+<div class="reply">
+    <h3 class="reply-title">Reply to {{feedback.complaint_id}}</h3>
+
+    <div class="reply-message-box">
+        <p><span>Comment:</span> {{feedback.comment}}</p>
+    </div>
+
+    <form method="POST" class="reply-form">
+        {% csrf_token %}
+
+        <textarea name="reply" class="reply-textarea" placeholder="Write your reply"></textarea>
+
+        <button type="submit" class="reply-button">Send Reply</button>
+    </form>
+</div>
+{% endblock %}

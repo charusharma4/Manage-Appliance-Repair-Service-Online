@@ -1,0 +1,22 @@
+{% extends 'ARSM/base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+{% block content %}
+<div class="admin_db">
+
+  <h1>Admin Dashboard</h1>
+  <p>Welcome, {{ request.user.full_name }}</p>
+
+  <ul>
+       <li><a href="{% url 'register_technician_admin' %}">Register New Technician</a></li>
+       <li><a href="{% url 'technician_assignment_list' %}">Technician Assignment List</a></li>
+       <li><a href="{% url 'complaint_admin_list' %}" class="add-btn">Complaint List</a></li>
+       <li><a href="{% url 'repair_admin_list' %}">Repair List</a></li>
+       <li><a href="{% url 'contact_list' %}">Contact Message List</a></li>
+       <li><a href="{% url 'feedback_list' %}">Feedback List</a></li>
+       <li><a href="{% url 'notification' %}">Send Notification</a><li>
+       <li><a href="{% url 'service_report' %}">Service Report</a><li>
+        </ul>
+
+</div>
+{% endblock %}

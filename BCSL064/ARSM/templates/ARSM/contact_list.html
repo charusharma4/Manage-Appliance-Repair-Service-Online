@@ -1,0 +1,39 @@
+{% extends 'ARSM/base.html'%}
+{% block title %} Contact List {% endblock %}
+
+{% block content %}
+<div class="ct-wrap">
+
+<h2 class="ct-title">Contact Messages</h2>
+
+<table class="ct-table">
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Subject</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody>
+{% for c in contacts %}
+<tr>
+<td data-label="Name">{{c.cname}}</td>
+<td data-label="Email">{{c.email}}</td>
+<td data-label="Subject">{{c.subject}}</td>
+<td data-label="Status">
+<span class="ct-st">{{c.status}}</span>
+</td>
+<td data-label="Action">
+<a class="ct-btn" href="{% url 'reply_message' c.id %}">Reply</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+
+</div>
+{% endblock %}

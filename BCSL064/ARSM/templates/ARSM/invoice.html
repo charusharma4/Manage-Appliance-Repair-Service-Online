@@ -1,0 +1,174 @@
+<!--Repair invoice by complaint-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Repair Invoice #{{ complaint.id }}</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .container {
+            width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            color: #2c3e50;
+        }
+
+        .header p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h3 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .details p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
+
+        .total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 12px;
+            color: #aaa;
+        }
+        .print-btn{
+            width: 20%;
+            padding: 10px;
+            background: linear-gradient(135deg, #049461, #27ae60);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .print-btn:hover{
+            background: linear-gradient(135deg, #28a745, #145C43);
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Repair Invoice</h1>
+        <p>Invoice Date: {{ repair.repair_date|date:"d M Y H:i" }}</p>
+        <p>Invoice #: INV-{{ complaint.id|stringformat:"05d" }}</p>
+    </div>
+
+    <div class="section details">
+        <h3>Customer Details</h3>
+        <p><strong>Name:</strong> {{ complaint.user_id.full_name }}</p>
+        <p><strong>Address:</strong> {{ complaint.service_address }}</p>
+    </div>
+
+    <div class="section details">
+        <h3>Complaint & Appliance Details</h3>
+        <p><strong>Complaint ID:</strong> {{ complaint.id }}</p>
+        <p><strong>Appliance:</strong> {{ complaint.app_id }}</p>
+        <p><strong>Description:</strong> {{ complaint.description }}</p>
+        <p><strong>Priority:</strong> {{ complaint.priority }}</p>
+    </div>
+
+    <div class="section details">
+        <h3>Repair Details</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Technician</th>
+                    <th>Work Done</th>
+                    <th>Parts Used</th>
+                    <th>Cost (₹)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ repair.technician_id }}</td>
+                    <td>{{ repair.work_done }}</td>
+                    <td>{{ repair.parts_used }}</td>
+                    <td>{{ repair.cost|floatformat:2 }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="total">
+        Total Amount: ₹ {{ repair.cost|floatformat:2 }}
+    </div>
+    <br>
+    <div style="text-align: right;">
+     <button onclick="window.print()" class="print-btn">
+        Print Invoice
+     </button>
+    </div>
+    <div class="footer">
+        Thank you for choosing our service!<br>
+        &copy; {{ now|date:"Y" }} Your Company Name
+    </div>
+
+</div>
+
+</body>
+</html>

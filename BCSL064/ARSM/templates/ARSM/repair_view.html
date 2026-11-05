@@ -1,0 +1,21 @@
+<!-- Technician repair view-->
+{% extends "ARSM/base.html" %}
+{% block title %}repair{% endblock %}
+{% block content %}
+<div class="repair">
+    <h2 class="form-title">Add Repair</h2>
+    <form method='POST' class="repair-form">
+        {% csrf_token %}
+
+        <label>Work Done</label>
+        {{ form.work_done }}
+        
+        <label>Parts Used</label>
+        {{ form.parts_used }}
+        
+        <label>Cost</label>
+        {{ form.cost }}
+        <button type="submit">save</button>
+    </form>
+</div>
+{% endblock %}

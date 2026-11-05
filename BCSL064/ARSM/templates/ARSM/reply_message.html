@@ -1,0 +1,21 @@
+{% extends 'ARSM/base.html'%}
+{% block title %} Reply 
+ {% endblock %}
+
+{% block content %}
+<div class="msg">
+    <h3 class="msg-title">Reply to {{contact.cname}}</h3>
+
+    <div class="msg-message-box">
+        <p><span>Message:</span> {{contact.message}}</p>
+    </div>
+
+    <form method="POST" class="msg-form">
+        {% csrf_token %}
+
+        <textarea name="msg" class="msg-textarea" placeholder="Write your reply"></textarea>
+
+        <button type="submit" class="msg-button">Send Reply</button>
+    </form>
+</div>
+{% endblock %}

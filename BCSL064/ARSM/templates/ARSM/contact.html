@@ -1,0 +1,43 @@
+{% extends "ARSM/base.html" %}
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+
+<div class="contact-container">
+
+    <!-- LEFT SIDE (FORM) -->
+    <div class="contact-form-section">
+        <form method="POST" class="contact-form">
+            {% csrf_token %}
+            
+            <h2>Contact Us</h2>
+
+            <label>Name</label>
+            {{ form.cname }}
+
+            <label>Email</label>
+            {{ form.email }}
+
+            <label>Subject</label>
+            {{ form.subject }}
+
+            <label>Message</label>
+            {{ form.message }}
+
+            <button type="submit" class="btn-submit">Submit</button>
+        </form>
+    </div>
+
+    <!-- RIGHT SIDE (INFO BOX) -->
+    <div class="contact-info-section">
+        <h2>Get in Touch</h2>
+        <p>If you have any questions, feel free to reach out to us.</p>
+
+        <p><strong>Email:</strong> charu2006@example.com</p>
+        <p><strong>Phone:</strong> +91 9876543210</p>
+        <p><strong>Address:</strong> Delhi, India</p>
+    </div>
+
+</div>
+
+{% endblock %}

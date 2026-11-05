@@ -1,0 +1,48 @@
+<!--Assignment list-->
+{% extends "ARSM/base.html" %}
+{% block title %}Technician Assignment List{% endblock %}
+
+{% block content %}
+
+<div class="technician-container">
+
+    <h2><center>Technician Assignment List</center></h2>
+
+    <table class="technician-table">
+        <thead>
+            <tr>
+                <th>Complaint ID</th>
+                <th>Technician ID</th>
+                <th>Status</th>
+                <th>Remark</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for up in technician_assignment %}
+            <tr>
+                <td>{{ up.complaint_id }}</td>
+                <td>{{ up.technician_id }}</td>
+                <td>
+                    <select name="status">
+                    <option value="pending" {% if up.status == "pending" %}selected{% endif %}>Pending</option>
+                    </select>
+                </td>
+                <td>{{ up.remark }}</td>
+                <td>
+                    <a href="{% url 'update_technician_assignment' up.id %}" class="edit-btn">Edit</a>
+                    <a href="{% url 'delete_technician_assignment' up.id %}" class="delete-btn">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="no-data">No Technician Assignments Available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

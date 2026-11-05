@@ -1,0 +1,12 @@
+{% extends 'ARSM/base.html'%}
+{% block title %} Technician {% endblock %}
+
+{% block content %}
+<div class="technician">
+    <h1>Welcome Technician</h1>
+    <ul>
+        <li><a href="{% url 'repair_tech_list' %}">Repair List</a></li>
+        <li><a href="{% url 'complaint_tech_list' %}">Complaints List</a></li>
+    </ul>
+</div>
+{% endblock %}

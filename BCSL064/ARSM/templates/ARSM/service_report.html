@@ -1,0 +1,200 @@
+<!--Service report page-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Reports</title>
+    <style>
+        /* =========================
+           BASE STYLING
+        ========================= */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f6fa;
+            color: #1f2937;
+            padding: 2rem;
+            margin: 0;
+        }
+
+        /* =========================
+           PAGE TITLE
+        ========================= */
+        .sr-page-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #111827;
+        }
+
+        /* =========================
+           CARD LAYOUT
+        ========================= */
+        .sr-card {
+            background-color: #fff;
+            padding: 1.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        /* =========================
+           FORM STYLING
+        ========================= */
+        .sr-filter-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: flex-end;
+            justify-content: flex-start;
+        }
+
+        .sr-form-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .sr-label {
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            color: #4b5563;
+        }
+
+        .sr-input {
+            padding: 0.6rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sr-input:focus {
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
+            outline: none;
+        }
+
+        .sr-button {
+            background-color: #4f46e5;
+            color: #fff;
+            padding: 0.65rem 1.3rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .sr-button:hover {
+            background-color: #6366f1;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           TABLE STYLING
+        ========================= */
+        .sr-table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 12px;
+            font-size: 0.95rem;
+        }
+
+        .sr-table thead {
+            background-color: #f3f4f6;
+        }
+
+        .sr-table th, .sr-table td {
+            text-align: left;
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .sr-table tbody tr:nth-child(even) {
+            background-color: #fafafb;
+        }
+
+        .sr-table tbody tr:hover {
+            background-color: #e0e7ff;
+            transition: background-color 0.3s ease;
+        }
+
+        /* =========================
+           NO DATA MESSAGE
+        ========================= */
+        .sr-no-data {
+            text-align: center;
+            font-size: 1rem;
+            color: #6b7280;
+            margin-top: 2rem;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+        @media (max-width: 768px) {
+            .sr-filter-form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .sr-table th, .sr-table td {
+                padding: 0.6rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1 class="sr-page-title">Service Reports</h1>
+
+<div class="sr-card">
+    <form method="get" class="sr-filter-form">
+        <div class="sr-form-group">
+            <label class="sr-label">Start Date</label>
+            <input type="date" name="start_date" value="{{ start_date }}" class="sr-input">
+        </div>
+        <div class="sr-form-group">
+            <label class="sr-label">End Date</label>
+            <input type="date" name="end_date" value="{{ end_date }}" class="sr-input">
+        </div>
+        <button type="submit" class="sr-button">Filter</button>
+    </form>
+</div>
+
+{% if complaints %}
+<div class="sr-card">
+    <table class="sr-table">
+        <thead>
+            <tr>
+                <th>Complaint ID</th>
+                <th>Customer</th>
+                <th>Appliance</th>
+                <th>Technician</th>
+                <th>Status</th>
+                <th>Complaint Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for complaint in complaints %}
+            <tr>
+                <td>{{ complaint.id }}</td>
+                <td>{{ complaint.user_id.full_name }}</td>
+                <td>{{ complaint.app_id.brand_name }} {{ complaint.app_id.model }}</td>
+                <td>{% if complaint.complaint_profile %}{{ complaint.complaint_profile.technician_id.user.full_name }}{% else %}-{% endif %}</td>
+                <td>{{ complaint.status }}</td>
+                <td>{{ complaint.Complaint_date|date:"Y-m-d" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<p class="sr-no-data">No complaints found for this date range.</p>
+{% endif %}
+
+</body>
+</html>

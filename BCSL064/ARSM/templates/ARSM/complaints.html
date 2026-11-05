@@ -1,0 +1,29 @@
+<!--Submit complaint-->
+{% extends "ARSM/base.html" %}
+{% block title %}Add Complaints{% endblock %}
+    <p>May Help You</p>
+    {% block content %}
+    <form method='POST' class="complaints">
+        <h2>Add Complaints</h2>
+        {% csrf_token %}
+    
+        <label>App Id</label>
+        {{ form.app_id }} 
+
+        <label>Priority</label>
+        {{ form.priority }}
+        
+        <label>Description</label>
+        {{ form.description }}
+        
+        <label>Status</label>
+        {{ form.status }}
+
+        <label>Service Address</label>
+        {{ form.service_address }}
+
+        <button type="submit">submit</button>
+        <a href="{% url 'customer_dashboard' %}"><button>Logout</button></a>
+    </form>
+</div>
+{% endblock %}

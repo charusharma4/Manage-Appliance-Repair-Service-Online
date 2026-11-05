@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Project{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'ARSM/css/style.css'%}">
+    <!-- code for font awesome cdn-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- code for font awesome cdn-->
+</head>
+<body>
+<header>
+    <!-- Top Contact Bar -->
+    <div class="top-bar">
+        <div class="contact-item">
+            <img class="icon_img" src="{% static 'ARSM/images/hand.png' %}" alt="email">
+            <div>
+                <strong>Email</strong>
+                <p>charu440@gmail.com</p>
+            </div>
+        </div>
+        <div class="contact-item">
+            <img src="{% static 'ARSM/images/contacts.png'%}" alt="phone">
+            <div>
+                <strong>Contact</strong>
+                <p>+91 8572349001</p>
+            </div>
+        </div>
+        <div class="contact-item">
+            <img src="{% static 'ARSM/images/map.png'%}" alt="location">
+            <div>
+                <strong>Location</strong>
+                <p>Delhi, India</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">
+            <img class="logo1" src="{% static 'ARSM/images/logo1.png' %}" alt="Logo" >
+        </div>
+        <!---search-->
+        <form class="search-form">
+         <input type="search" id="search-form" placeholder="search here....">
+            <label for="search-box" class="fa fa-search"></label>
+        </form>
+     <!---search-->
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                {% if user.is_authenticated %}
+                    {% if user.role == 'customer' %}
+                        <li><a href="{% url 'customer_dashboard' %}">Customer Dashboard</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% elif user.role == 'technician' %}
+                        <li><a href="{% url 'technician_dashboard' %}">Technician Dashboard</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% elif user.role == 'admin' %}
+                        <li><a href="{% url 'admin_dashboard' %}">Admin Dashboard</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% endif %}
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+<br>
+<br>
+<br>
+<br>
+<br>
+<footer>
+    &copy; 2026 Charu Sharma. All Rights Reserved.
+</footer>
+</body>
+</html>

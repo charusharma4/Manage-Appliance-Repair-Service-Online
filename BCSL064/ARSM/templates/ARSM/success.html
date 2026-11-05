@@ -1,0 +1,11 @@
+{% extends 'ARSM/base.html'%}
+{% block title %} success {% endblock %}
+
+{% block content %}
+
+<div class="success-container">
+    <h1>Form Submitted Successfully ✅</h1>
+    <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'ARSM/base.html' %}
+{% block title %} Login {% endblock %}
+
+{% block content %}
+<form class="form1" method="POST">
+    {% csrf_token %}
+    <label>Email</label>
+    <input class="input1" type="email" name="email" placeholder="Email">
+    <label>Password</label>
+    <input class="input1" type="password" name="password" placeholder="Password">
+    <br>
+    <a href="{% url 'password_reset' %}">Forgot Password?</a>
+    <button type="submit">Login</button>
+  </form>
+
+{% if error %}
+  <p style="color: red;">{{ error }}</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+  <div style="color:red;">
+    {{ form.non_field_errors }}
+  </div>
+{% endif %}
+{% endblock %}

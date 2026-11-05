@@ -1,0 +1,42 @@
+<!--Customer notifications-->
+{% extends "ARSM/base.html" %}
+{% block title %}notification List{% endblock %}
+
+{% block content %}
+
+<div class="appliance-container">
+
+    <h2><center>Notification List</center></h2>
+
+    <table class="appliance-table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>User Id</th>
+                <th>Title</th>
+                <th>Message</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for np in notification %}
+            <tr>
+                <td>{{ np.email }}</td>
+                <td>{{ np.user_id }}</td>
+                <td>{{ np.title }}</td>
+                <td>{{ np.msg }}</td>
+                <td>{{ np.type }}</td>
+
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="no-data">No notification Available</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}
